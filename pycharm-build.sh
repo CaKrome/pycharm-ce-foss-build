@@ -4,6 +4,7 @@ pycharm_version=211.7442.45
 android_plugin_version=211.7442.13
 
 # Download PyCharm and Android plugin(required for building PyCharm)
+
 wget https://github.com/JetBrains/intellij-community/archive/refs/tags/pycharm/211.7442.45.tar.gz -O pycharm-source.tar.gz
 wget https://github.com/JetBrains/android/archive/refs/tags/pycharm/211.7442.13.tar.gz -O android-pycharm-source.tar.gz
 
