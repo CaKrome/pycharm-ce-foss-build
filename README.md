@@ -8,26 +8,15 @@ PyCharm Community Edition is a popular Python IDE, however the official binaries
 
 This build uses the modifications/patches from ```pycharm-community-edition``` in the repo of Arch Linux, and make it available to all GNU/Linux distros.
 
+# Building method
+
+Execute [pycharm-build.sh](pycharm-build.sh)
+The resulting binaries can be found in out/pycharmPC/artifcts.
+
+## Dependencies
+OpenJDK version greater than 11 and ```ant```.
+
 # License
 
-The build script is licensed under GNU General Public License version 3.
+The build script is licensed under GNU General Public License Version 3.
 The binaries are licensed under Apache License, Version 2.0.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
