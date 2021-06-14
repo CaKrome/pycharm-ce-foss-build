@@ -18,5 +18,5 @@ OpenJDK version greater than 11 and ```ant```.
 
 # License
 
-The build script is licensed under GNU General Public License Version 3.
 The binaries are licensed under Apache License, Version 2.0.
+The build script is licensed under GNU General Public License Version 3.
