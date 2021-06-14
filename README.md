@@ -8,7 +8,7 @@ PyCharm Community Edition is a popular Python IDE, however the official binaries
 
 This build uses the modifications/patches from ```pycharm-community-edition``` in the repo of Arch Linux, and make it available to all GNU/Linux distros.
 
-# Building method
+# Usage
 
 Execute [pycharm-build.sh](pycharm-build.sh)
 The resulting binaries can be found in out/pycharmPC/artifcts.
