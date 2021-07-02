@@ -11,7 +11,7 @@ This build uses the modifications/patches from ```pycharm-community-edition``` i
 # Usage
 
 Execute [pycharm-build.sh](pycharm-build.sh)
-The resulting binaries can be found in out/pycharmPC/artifcts.
+The resulting binaries can be found in out/pycharm-ce/artifacts.
 
 ## Dependencies
 OpenJDK version greater than 11 and ```ant```.
