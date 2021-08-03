@@ -25,6 +25,7 @@ sed '/String targetOS/c   String targetOS = OS_LINUX' -i platform/build-scripts/
 sed -E 's|(<sysproperty key="jna.nosys")|<sysproperty key="intellij.build.target.os" value="linux" />\1|' -i build.xml
 sed -E 's|(<sysproperty key="java.awt.headless")|<sysproperty key="intellij.build.target.os" value="linux" />\1|' -i python/build.xml
 sed "s/-Xmx612m -XX:MaxPermSize=152m/-Xmx2048m -XX:MaxPermSize=512m/" -i python/build.xml
+sed "s|-Didea.build.number=\${idea.build.number}|-Didea.build.number=\${idea.build.number} -Didea.home.path=|" -i python/build.xml
 sed 's|../build/plugins-autoupload.txt|plugins-autoupload.txt|' -i platform/build-scripts/groovy/org/jetbrains/intellij/build/impl/DistributionJARsBuilder.groovy
 touch plugins-autoupload.txt
 echo $pycharm_version > build.txt
