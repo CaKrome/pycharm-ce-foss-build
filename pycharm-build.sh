@@ -1,11 +1,11 @@
 #!/bin/bash
 
-pycharm_version=212.4746.96
+pycharm_version=212.5080.64
 
 # Download PyCharm and Android plugin(required for building PyCharm)
 
-wget https://github.com/JetBrains/intellij-community/archive/refs/tags/pycharm/212.4746.96.tar.gz -O pycharm-source.tar.gz
-git clone --depth 1 --branch pycharm/212.4746.96 git://git.jetbrains.org/idea/android.git
+wget https://github.com/JetBrains/intellij-community/archive/refs/tags/pycharm/212.5080.64.tar.gz -O pycharm-source.tar.gz
+git clone --depth 1 --branch pycharm/212.5080.64 git://git.jetbrains.org/idea/android.git
 
 # Extract files
 
