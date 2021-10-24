@@ -14,7 +14,7 @@ Execute [pycharm-build.sh](pycharm-build.sh)
 The resulting binaries can be found in out/pycharm-ce/artifacts.
 
 ## Dependencies
-OpenJDK version greater than 11, ```ant``` and ```git```.
+OpenJDK version 11, ```ant``` and ```git```.
 
 # License
 
