@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pycharm_version=213.6777.50
+pycharm_version=213.7172.26
 
 # Download PyCharm and Android plugin(required for building PyCharm)
 
