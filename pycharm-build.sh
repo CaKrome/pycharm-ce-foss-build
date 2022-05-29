@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pycharm_version=213.7172.26
+pycharm_version=$(cat pycharm_ver)
 
 # Download PyCharm and Android plugin(required for building PyCharm)
 
@@ -9,33 +9,35 @@ git clone --depth 1 --branch pycharm/$pycharm_version git://git.jetbrains.org/id
 
 # Extract files
 
-tar -xvf pycharm-source.tar.gz
-mv android intellij-community-pycharm-$pycharm_version
+tar -xf pycharm-source.tar.gz
+rm -rf android/.git/
+find android/ -type f -exec sha256sum {} + | awk '{print $1}' | sort | sha256sum | awk '{print $1}' > checksum_bv
+if [[ $(cat checksum_bv) == $(cat checksum_android) ]]
+then
+  echo "Android plugin checksum verification completed"
+  echo "Checksum is $(cat checksum_bv)"
+  mv android intellij-community-pycharm-$pycharm_version
 
-# Some needed modifications
+  # Some needed modifications
 
-cd intellij-community-pycharm-$pycharm_version
+  cd intellij-community-pycharm-$pycharm_version
 
-# https://youtrack.jetbrains.com/issue/IDEA-266631 (Removal of non-free plugins)
-sed '/intellij.cwm.plugin/d' -i python/build/plugin-list.txt
-sed '/intellij.marketplace/d' -i python/build/plugin-list.txt
+  sed '/String targetOS/c   String targetOS = OS_LINUX' -i platform/build-scripts/groovy/org/jetbrains/intellij/build/BuildOptions.groovy
+  sed 's|../build/plugins-autoupload.txt|plugins-autoupload.txt|' -i platform/build-scripts/groovy/org/jetbrains/intellij/build/impl/DistributionJARsBuilder.groovy
+  touch plugins-autoupload.txt
+  sed 's|intellij.pycharm.community.build|"$(cd "$(dirname "$0")"; pwd)/../" intellij.pycharm.community.build|' -i python/installers.cmd
 
-sed '/def targetOs =/c def targetOs = "linux"' -i build/dependencies/setupJbre.gradle
-sed '/String targetOS/c   String targetOS = OS_LINUX' -i platform/build-scripts/groovy/org/jetbrains/intellij/build/BuildOptions.groovy
-sed -E 's|(<sysproperty key="jna.nosys")|<sysproperty key="intellij.build.target.os" value="linux" />\1|' -i build.xml
-sed -E 's|(<sysproperty key="java.awt.headless")|<sysproperty key="intellij.build.target.os" value="linux" />\1|' -i python/build.xml
-sed "s/-Xmx612m -XX:MaxPermSize=152m/-Xmx2048m -XX:MaxPermSize=512m/" -i python/build.xml
-sed "s|-Didea.build.number=\${idea.build.number}|-Didea.build.number=\${idea.build.number} -Didea.home.path=|" -i python/build.xml
-sed 's|../build/plugins-autoupload.txt|plugins-autoupload.txt|' -i platform/build-scripts/groovy/org/jetbrains/intellij/build/impl/DistributionJARsBuilder.groovy
-touch plugins-autoupload.txt
-echo $pycharm_version > build.txt
+  echo $pycharm_version > build.txt
 
-# Build
+  # Build
 
-cd python
-ant -Dintellij.build.target.os=linux build
+  ./python/installers.cmd -Dintellij.build.target.os=linux
 
-# Clean up
+  # Clean up
+  cd ..
+  rm pycharm-source.tar.gz
+  rm checksum_bv
 
-cd ../../
-rm pycharm-source.tar.gz
+else
+  echo "Downloaded Android plugin maybe corrupted."
+fi
